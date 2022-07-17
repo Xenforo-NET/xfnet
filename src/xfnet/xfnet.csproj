@@ -47,6 +47,7 @@
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\ConversationMessage.cs" />
     <Compile Include="Models\Date.cs" />
+    <Compile Include="Models\FieldChoice.cs" />
     <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\ImageSizes.cs" />
     <Compile Include="Models\LinkForum.cs" />
@@ -54,11 +55,17 @@
     <Compile Include="Models\NodeDiscussion.cs" />
     <Compile Include="Models\NodeTypeData.cs" />
     <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Poll.cs" />
+    <Compile Include="Models\PollResponse.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\ProfilePost.cs" />
+    <Compile Include="Models\ProfilePostComment.cs" />
+    <Compile Include="Models\Thread.cs" />
+    <Compile Include="Models\ThreadField.cs" />
+    <Compile Include="Models\ThreadPrefix.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

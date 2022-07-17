@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace xfnet.Models
 {
-    internal class PollResponse
+    public class PollResponse
     {
+        public string text { get; set; }
+
+        public long? vote_count { get; set; }
+
+        public bool? visitor_voted_for { get; set; }
     }
 }

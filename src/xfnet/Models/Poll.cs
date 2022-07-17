@@ -15,7 +15,7 @@ namespace xfnet.Models
 
         public bool? has_voted { get; set; }
 
-        private Dictionary<string, object> _responses { get { return _responses; } 
+        private Dictionary<string, PollResponse> _responses { get { return _responses; } 
             set 
             { 
                 _responses = value;
@@ -23,12 +23,12 @@ namespace xfnet.Models
             } 
         }
 
-        private List<object> _list_responses { get; set; }
+        private List<PollResponse> _list_responses { get; set; }
 
         /// <summary>
         /// List of possible responses with text, vote count (if visible) and whether the API user has voted for each.
         /// </summary>
-        public List<object> responses { 
+        public List<PollResponse> responses { 
             get 
             { 
                 return _list_responses;

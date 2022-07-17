@@ -17,14 +17,13 @@ namespace xfnet.Models
 
         public bool? is_last_post { get; set; }
 
-
         /// <summary>
         /// (Conditionally returned) If accessing as a user, true if this post is unread.
         /// </summary>
         public bool? is_unread { get; set; }
 
         /// <summary>
-        /// HTML parsed version of the message contents..
+        /// HTML parsed version of the message contents.
         /// </summary>
         public string message_parsed { get; set; }
 
