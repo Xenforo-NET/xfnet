@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace xfnet.XfModels
 {
@@ -26,7 +27,20 @@ namespace xfnet.XfModels
         public bool? IsUnread { get; set; }
 
         [JsonProperty("last_post_date")]
-        public long? LastPostDate { get; set; }
+        public long? LastPostDateUnix
+        {
+            get { return LastPostDateUnix; }
+            set
+            {
+                LastPostDateUnix = value;
+                if (!value.HasValue)
+                    LastPostDate = null;
+                else
+                    LastPostDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            }
+        }
+
+        public DateTime? LastPostDate { get; set; }
 
         [JsonProperty("last_post_id")]
         public long? LastPostId { get; set; }

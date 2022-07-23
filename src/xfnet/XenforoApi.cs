@@ -8,5 +8,6 @@ namespace xfnet
 {
     public class XenforoApi
     {
+
     }
 }

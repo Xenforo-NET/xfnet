@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace xfnet.XfModels
 {
@@ -8,7 +9,20 @@ namespace xfnet.XfModels
     public class Page
     {
         [JsonProperty("publish_date")]
-        public long? PublishDate { get; set; }
+        public long? PublishDateUnix
+        {
+            get { return PublishDateUnix; }
+            set
+            {
+                PublishDateUnix = value;
+                if (!value.HasValue)
+                    PublishDate = null;
+                else
+                    PublishDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            }
+        }
+
+        public DateTime? PublishDate { get; set; }
 
         [JsonProperty("view_count")]
         public long? ViewCount { get; set; }

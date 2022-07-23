@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,11 +17,11 @@ namespace xfnet.XfModels
         public bool? HasVoted { get; set; }
 
         [JsonProperty("responses")]
-        private Dictionary<string, PollResponse> _responses { get { return _responses; } 
+        public Dictionary<string, PollResponse> _responses {
             set 
             { 
                 _responses = value;
-                _list_responses = _responses.Values.ToList();
+                _list_responses = value.Values.ToList();
             } 
         }
 
@@ -56,7 +57,20 @@ namespace xfnet.XfModels
         public long? MaxVotes { get; set; }
 
         [JsonProperty("close_date")]
-        public long? CloseDate { get; set; }
+        public long? CloseDateUnix
+        {
+            get { return CloseDateUnix; }
+            set
+            {
+                CloseDateUnix = value;
+                if (!value.HasValue)
+                    CloseDate = null;
+                else
+                    CloseDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            }
+        }
+
+        public DateTime? CloseDate { get; set; }
 
         [JsonProperty("change_vote")]
         public bool? ChangeVote { get; set; }

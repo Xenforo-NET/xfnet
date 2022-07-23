@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace xfnet.XfModels
@@ -66,7 +67,20 @@ namespace xfnet.XfModels
         public long? UserId { get; set; }
 
         [JsonProperty("comment_date")]
-        public long? CommentDate { get; set; }
+        public long? CommentDateUnix
+        {
+            get { return CommentDateUnix; }
+            set
+            {
+                CommentDateUnix = value;
+                if (!value.HasValue)
+                    CommentDate = null;
+                else
+                    CommentDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            }
+        }
+
+        public DateTime? CommentDate { get; set; }
 
         [JsonProperty("message")]
         public string Message { get; set; }

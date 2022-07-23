@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace xfnet.XfModels
@@ -57,7 +58,20 @@ namespace xfnet.XfModels
         public long? UserId { get; set; }
 
         [JsonProperty("start_date")]
-        public long? StartDate { get; set; }
+        public long? StartDateUnix 
+        { 
+            get { return StartDateUnix; } 
+            set 
+            { 
+                StartDateUnix = value;
+                if (!value.HasValue)
+                    StartDate = null;
+                else 
+                    StartDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            } 
+        }
+
+        public DateTime? StartDate { get; set; }
 
         [JsonProperty("open_invite")]
         public bool? OpenInvite { get; set; }
@@ -75,7 +89,20 @@ namespace xfnet.XfModels
         public long? FirstMessageId { get; set; }
 
         [JsonProperty("last_message_date")]
-        public long? LastMessageDate { get; set; }
+        public long? LastMessageDateUnix
+        {
+            get { return LastMessageDateUnix; }
+            set
+            {
+                LastMessageDateUnix = value;
+                if (!value.HasValue)
+                    LastMessageDate = null;
+                else
+                    LastMessageDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            }
+        }
+
+        public DateTime? LastMessageDate { get; set; }
 
         [JsonProperty("last_message_id")]
         public long? LastMessageId { get; set; }

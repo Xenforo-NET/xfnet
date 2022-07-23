@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace xfnet.XfModels
 {
@@ -41,7 +42,20 @@ namespace xfnet.XfModels
         public long? ContentId { get; set; }
 
         [JsonProperty("attach_date")]
-        public long? AttachDate { get; set; }
+        public long? AttachDateUnix
+        {
+            get { return AttachDateUnix; }
+            set
+            {
+                AttachDateUnix = value;
+                if (!value.HasValue)
+                    AttachDate = null;
+                else
+                    AttachDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            }
+        }
+
+        public DateTime? AttachDate { get; set; }
 
         [JsonProperty("view_count")]
         public long? ViewCount { get; set; }

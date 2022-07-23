@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace xfnet.XfModels
@@ -63,7 +64,20 @@ namespace xfnet.XfModels
         public long? ConversationId { get; set; }
 
         [JsonProperty("message_date")]
-        public long? MessageDate { get; set; }
+        public long? MessageDateUnix
+        {
+            get { return MessageDateUnix; }
+            set
+            {
+                MessageDateUnix = value;
+                if (!value.HasValue)
+                    MessageDate = null;
+                else
+                    MessageDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            }
+        }
+
+        public DateTime? MessageDate { get; set; }
 
         [JsonProperty("user_id")]
         public long? UserId { get; set; }

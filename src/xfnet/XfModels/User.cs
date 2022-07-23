@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace xfnet.XfModels
@@ -129,7 +130,17 @@ namespace xfnet.XfModels
         /// Date of birth with year, month and day keys. Returned only if permissions are met.
         /// </summary>
         [JsonProperty("dob")]
-        public XfDate DateOfBirth { get; set; }
+        public XfDate DateOfBirthUnix
+        {
+            get { return DateOfBirthUnix; }
+            set
+            {
+                DateOfBirthUnix = value;
+                DateOfBirth = Utilities.DateConvert.XfDateToDateTime(value);
+            }
+        }
+
+        public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
         /// (Verbose results only) Returned only if permissions are met.
@@ -306,7 +317,20 @@ namespace xfnet.XfModels
         public long? QuestionSolutionCount { get; set; }
 
         [JsonProperty("register_date")]
-        public long? RegisterDate { get; set; }
+        public long? RegisterDateUnix
+        {
+            get { return RegisterDateUnix; }
+            set
+            {
+                RegisterDateUnix = value;
+                if (!value.HasValue)
+                    RegisterDate = null;
+                else
+                    RegisterDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            }
+        }
+
+        public DateTime? RegisterDate { get; set; }
 
         [JsonProperty("trophy_points")]
         public long? TrophyPoints { get; set; }

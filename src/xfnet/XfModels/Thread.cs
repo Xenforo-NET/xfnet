@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace xfnet.XfModels
@@ -126,7 +127,20 @@ namespace xfnet.XfModels
         public long? UserId { get; set; }
 
         [JsonProperty("post_date")]
-        public long? PostDate { get; set; }
+        public long? PostDateUnix
+        {
+            get { return PostDateUnix; }
+            set
+            {
+                PostDateUnix = value;
+                if (!value.HasValue)
+                    PostDate = null;
+                else
+                    PostDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            }
+        }
+
+        public DateTime? PostDate { get; set; }
 
         [JsonProperty("sticky")]
         public bool? Sticky { get; set; }
@@ -144,7 +158,20 @@ namespace xfnet.XfModels
         public long? FirstPostId { get; set; }
 
         [JsonProperty("last_post_date")]
-        public long? LastPostDate { get; set; }
+        public long? LastPostDateUnix
+        {
+            get { return LastPostDateUnix; }
+            set
+            {
+                LastPostDateUnix = value;
+                if (!value.HasValue)
+                    LastPostDate = null;
+                else
+                    LastPostDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+            }
+        }
+
+        public DateTime? LastPostDate { get; set; }
 
         [JsonProperty("last_post_id")]
         public long? LastPostId { get; set; }
