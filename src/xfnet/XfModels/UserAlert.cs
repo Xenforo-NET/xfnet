@@ -3,7 +3,7 @@ using System;
 
 namespace xfnet.XfModels
 {
-    public class Alert
+    public class UserAlert
     {
         [JsonProperty("action")]
         public string Action { get; set; }
