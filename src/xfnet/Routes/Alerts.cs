@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using RestSharp;
 using Newtonsoft.Json;
 
@@ -28,13 +26,13 @@ namespace xfnet.Routes
         /// <summary>
         /// Gets the API user's list of alerts
         /// </summary>
-        /// <typeparam name="T">A class that inherits XfModels.UserAlert</typeparam>
+        /// <typeparam name="T">A class that inherits XfModels.UserAlert.</typeparam>
         /// <param name="page"></param>
         /// <param name="cutoff">Unix timestamp of oldest alert to include. Note that unread or unviewed alerts are always included.</param>
         /// <param name="unviewed">If true, gets only unviewed alerts. Unviewed alerts have not been seen (in the standard UI).</param>
         /// <param name="unread">If true, gets only unread alerts. Unread alerts may have been seen but the content they relate to has not been viewed.</param>
         /// <returns></returns>
-        public UserAlertsResponse<T> Get<T>(long page = 0, long cutoff = 0, bool unviewed = false, bool unread = false) where T : XfModels.UserAlert
+        public UserAlertsResponse<T> GetAll<T>(long page = 0, long cutoff = 0, bool unviewed = false, bool unread = false) where T : XfModels.UserAlert
         {
             RestRequest request = new RestRequest("alerts", Method.Get);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
@@ -61,7 +59,7 @@ namespace xfnet.Routes
         /// <param name="unread">If true, gets only unread alerts. Unread alerts may have been seen but the content they relate to has not been viewed.</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public UserAlertsResponse Get(long page = 0, long cutoff = 0, bool unviewed = false, bool unread = false)
+        public UserAlertsResponse GetAll(long page = 0, long cutoff = 0, bool unviewed = false, bool unread = false)
         {
             RestRequest request = new RestRequest("alerts", Method.Get);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
@@ -132,7 +130,7 @@ namespace xfnet.Routes
         /// <summary>
         /// Gets information about the specified alert.
         /// </summary>
-        /// <typeparam name="T">A class that inherits XfModels.UserAlert</typeparam>
+        /// <typeparam name="T">A class that inherits XfModels.UserAlert.</typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
         public UserAlertResponse<T> GetById<T>(long id) where T : XfModels.UserAlert
@@ -203,9 +201,6 @@ namespace xfnet.Routes
 
         public class UserAlertResponseVerbose<T> : UserAlertResponse<T> where T : XfModels.UserAlert
         {
-            [JsonProperty("pagination")]
-            public XfModels.Pagination Pagination;
-
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }
@@ -247,9 +242,6 @@ namespace xfnet.Routes
 
         public class UserAlertResponseVerbose : UserAlertResponse
         {
-            [JsonProperty("pagination")]
-            public XfModels.Pagination Pagination;
-
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }

@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="Enums\Client.cs" />
     <Compile Include="Routes\Alerts.cs" />
+    <Compile Include="Routes\Attachments.cs" />
     <Compile Include="Utilities\DateConvert.cs" />
     <Compile Include="XenforoApi.cs" />
     <Compile Include="XfModels\UserAlert.cs" />
