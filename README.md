@@ -1,6 +1,6 @@
 # XenForoSharp
 
-[![Build](https://github.com/Xenforo-NET/xfnet/actions/workflows/ci.yml/badge.svg)](https://github.com/Xenforo-NET/xfnet/actions/workflows/ci.yml)
+[![Build](https://github.com/XenForoSharp/XenForoSharp/actions/workflows/ci.yml/badge.svg)](https://github.com/XenForoSharp/XenForoSharp/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/XenForoSharp.svg)](https://www.nuget.org/packages/XenForoSharp/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -33,13 +33,13 @@ If you're using the repository directly:
 ### Add as a project reference
 
 ```xml
-<ProjectReference Include="src\xfnet\xfnet.csproj" />
+<ProjectReference Include="src\XenForoSharp\XenForoSharp.csproj" />
 ```
 
 ### Build from source
 
 ```powershell
-& "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe" src\xfnet.sln /t:Build /p:Configuration=Release
+& "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe" src\XenForoSharp.sln /t:Build /p:Configuration=Release
 ```
 
 ---
@@ -65,6 +65,8 @@ var threads = api.Threads.GetAll(page: 1, order: "post_date", direction: "desc")
 foreach (var thread in threads.Threads)
     Console.WriteLine(thread.Title);
 ```
+
+Async variants are available for the same routes via the `Async` suffix, for example `await api.Threads.GetAllAsync(...)`.
 
 The base URL is normalized automatically - any of these will work:
 
@@ -92,6 +94,7 @@ See [examples/README.md](examples/README.md) for runnable examples:
 
 - [UserAuth.cs](examples/UserAuth.cs) - API key auth flow
 - [Threads.cs](examples/Threads.cs) - reading and creating threads
+- [AsyncThreads.cs](examples/AsyncThreads.cs) - async threads and posts with CancellationToken
 - [Attachments.cs](examples/Attachments.cs) - uploading files and fetching thumbnails
 - [Users.cs](examples/Users.cs) - user lookup and profile data
 
@@ -99,7 +102,8 @@ See [examples/README.md](examples/README.md) for runnable examples:
 
 ## Notes
 
-- The client is currently synchronous.
+- Sync and async route methods are both available.
+- Async methods use the `Async` suffix and accept an optional `CancellationToken`.
 - XML docs are generated on build, so IntelliSense works out of the box.
 
 ---

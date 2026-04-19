@@ -5,8 +5,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$solution = Join-Path $root "src\xfnet.sln"
-$nuspec = Join-Path $root "src\xfnet\xfnet.nuspec"
+$solution = Join-Path $root "src\XenForoSharp.sln"
+$nuspec = Join-Path $root "src\XenForoSharp\XenForoSharp.nuspec"
 $artifacts = Join-Path $root "artifacts"
 
 $msbuildCandidates = @(

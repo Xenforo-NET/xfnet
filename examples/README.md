@@ -9,3 +9,5 @@ These examples are as simple as possible and will help you understand the basic 
   Creating attachment keys, uploading files and attaching them to posts.
 - `Users.cs`  
   Listing users, finding users and updating the current account.
+- `AsyncThreads.cs`  
+  Async versions of thread and post operations using `await` and `CancellationToken`.

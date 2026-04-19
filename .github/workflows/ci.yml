@@ -46,7 +46,7 @@ jobs:
           Split-Path $nuget -Parent | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Restore packages
-        run: nuget restore src\xfnet.sln
+        run: nuget restore src\XenForoSharp.sln
 
       - name: Build
-        run: msbuild src\xfnet.sln /t:Build /p:Configuration=Release
+        run: msbuild src\XenForoSharp.sln /t:Build /p:Configuration=Release

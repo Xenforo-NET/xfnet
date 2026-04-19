@@ -11,7 +11,7 @@ if ($Version -notmatch '^\d+\.\d+\.\d+$')
 }
 
 $root = Split-Path -Parent $PSScriptRoot
-$assemblyInfo = Join-Path $root "src\xfnet\Properties\AssemblyInfo.cs"
+$assemblyInfo = Join-Path $root "src\XenForoSharp\Properties\AssemblyInfo.cs"
 $versionParts = $Version.Split(".")
 $assemblyVersion = "{0}.{1}.{2}.0" -f $versionParts[0], $versionParts[1], $versionParts[2]
 
