@@ -17,13 +17,13 @@ Typed XenForo REST API client for .NET Framework 4.8.
 
 ### Add to your project
 
-`````xml
+```xml
 <ProjectReference Include="src\xfnet\xfnet.csproj" />
 ```
 
 ### Build from source
 
-````powershell
+```powershell
 & "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe" src\xfnet.sln /t:Build /p:Configuration=Release
 ```
 
@@ -107,6 +107,4 @@ See [RELEASING.md](RELEASING.md) for the full release process.
 ---
 
 ## License
-
 [MIT](LICENSE)
-```
