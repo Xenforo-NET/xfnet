@@ -107,6 +107,4 @@ See [RELEASING.md](RELEASING.md) for the full release process.
 ---
 
 ## License
-
 [MIT](LICENSE)
-```
