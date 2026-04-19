@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: ThreadPrefix. See https://xenforo.com/community/pages/api-endpoints/#type_ThreadPrefix.
@@ -38,3 +38,4 @@ namespace xfnet.XfModels
         public long? MaterializedOrder { get; set; }
     }
 }
+

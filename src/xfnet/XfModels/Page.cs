@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: Page. See https://xenforo.com/community/pages/api-endpoints/#type_Page.
@@ -31,3 +31,4 @@ namespace xfnet.XfModels
         public long? ViewCount { get; set; }
     }
 }
+

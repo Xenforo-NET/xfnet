@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: User. Information about the user. Different information will be included based on permissions and verbosity. See https://xenforo.com/community/pages/api-endpoints/#type_User.
@@ -350,3 +350,4 @@ namespace xfnet.XfModels
         public long? VoteScore { get; set; }
     }
 }
+

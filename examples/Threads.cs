@@ -1,7 +1,7 @@
-using System;
-using xfnet;
+﻿using System;
+using XenForoSharp;
 
-namespace xfnet.examples
+namespace XenForoSharp.examples
 {
     internal static class Threads
     {
@@ -15,7 +15,7 @@ namespace xfnet.examples
             var created = api.Threads.Create(
                 node_id: 2,
                 title: "API thread",
-                message: "Created from xfnet");
+                message: "Created from XenForoSharp");
 
             Console.WriteLine(created.Thread.ThreadId);
 
@@ -24,9 +24,10 @@ namespace xfnet.examples
 
             var reply = api.Posts.Create(
                 thread_id: created.Thread.ThreadId.Value,
-                message: "Reply from xfnet");
+                message: "Reply from XenForoSharp");
 
             Console.WriteLine(reply.Post.PostId);
         }
     }
 }
+

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: Poll. See https://xenforo.com/community/pages/api-endpoints/#type_Poll.
@@ -83,3 +83,4 @@ namespace xfnet.XfModels
         public bool? ViewResultsUnvoted { get; set; }
     }
 }
+

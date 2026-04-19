@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
-[assembly: AssemblyTitle("xfnet")]
+[assembly: AssemblyTitle("XenForoSharp")]
 [assembly: AssemblyDescription("Typed XenForo API client for .NET Framework 4.8.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Xenforo-NET")]
-[assembly: AssemblyProduct("xfnet")]
-[assembly: AssemblyCopyright("Copyright © Xenforo-NET")]
+[assembly: AssemblyCompany("XenForoSharp")]
+[assembly: AssemblyProduct("XenForoSharp")]
+[assembly: AssemblyCopyright("Copyright © XenForoSharp")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,4 +34,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
 

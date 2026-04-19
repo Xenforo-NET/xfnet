@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     public class Pagination
     {
@@ -20,3 +20,4 @@ namespace xfnet.XfModels
         public long? Total { get; set; }
     }
 }
+

@@ -1,8 +1,8 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: Search. See https://docs.xenforo.com/api.
@@ -59,3 +59,4 @@ namespace xfnet.XfModels
         public string QueryHash { get; set; }
     }
 }
+

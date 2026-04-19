@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     public class PollResponse
     {
@@ -14,3 +14,4 @@ namespace xfnet.XfModels
         public bool? VisitorVotedFor { get; set; }
     }
 }
+

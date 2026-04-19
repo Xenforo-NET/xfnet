@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: ThreadField. See https://xenforo.com/community/pages/api-endpoints/#type_ThreadField.
@@ -54,3 +54,4 @@ namespace xfnet.XfModels
         public bool? SearchEnabled { get; set; }
     }
 }
+

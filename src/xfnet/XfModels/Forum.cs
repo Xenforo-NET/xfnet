@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: Forum. See https://xenforo.com/community/pages/api-endpoints/#type_Forum.
@@ -20,3 +20,4 @@ namespace xfnet.XfModels
         public long? MinTags { get; set; }
     }
 }
+

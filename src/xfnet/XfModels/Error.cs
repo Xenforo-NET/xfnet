@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     public class Error
     {
@@ -15,3 +15,4 @@ namespace xfnet.XfModels
         public Dictionary<string, string> Params { get; set; }
     }
 }
+

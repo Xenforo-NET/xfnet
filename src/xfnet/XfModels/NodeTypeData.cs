@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     public class NodeTypeData
     {
@@ -70,3 +70,4 @@ namespace xfnet.XfModels
         public bool? RequirePrefix { get; set; }
     }
 }
+

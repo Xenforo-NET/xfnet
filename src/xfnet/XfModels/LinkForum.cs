@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: LinkForum. See https://xenforo.com/community/pages/api-endpoints/#type_LinkForum.
@@ -14,3 +14,4 @@ namespace xfnet.XfModels
         public long? RedirectCount { get; set; }
     }
 }
+

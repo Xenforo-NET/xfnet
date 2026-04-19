@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace xfnet.Utilities
+namespace XenForoSharp.Utilities
 {
     public static class DateConvert
     {
@@ -18,3 +18,4 @@ namespace xfnet.Utilities
         }
     }
 }
+

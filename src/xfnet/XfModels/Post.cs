@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: Post. See https://xenforo.com/community/pages/api-endpoints/#type_Post.
@@ -177,3 +177,4 @@ namespace xfnet.XfModels
         public User User { get; set; }
     }
 }
+

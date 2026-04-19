@@ -1,8 +1,8 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
 
-namespace xfnet.Routes
+namespace XenForoSharp.Routes
 {
     public class Conversations : RouteBase
     {
@@ -219,3 +219,4 @@ namespace xfnet.Routes
         }
     }
 }
+

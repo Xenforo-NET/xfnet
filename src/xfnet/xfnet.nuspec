@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
-    <id>xfnet</id>
+    <id>XenForoSharp</id>
     <version>$version$</version>
-    <title>xfnet</title>
-    <authors>Xenforo-NET</authors>
-    <owners>Xenforo-NET</owners>
+    <title>XenForoSharp</title>
+    <authors>XenForoSharp</authors>
+    <owners>XenForoSharp</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
+    <icon>images\package-icon.png</icon>
     <projectUrl>https://github.com/Xenforo-NET/xfnet</projectUrl>
     <repository type="git" url="https://github.com/Xenforo-NET/xfnet.git" />
     <readme>README.md</readme>
@@ -32,11 +33,12 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="src\xfnet\bin\$configuration$\xfnet.dll" target="lib\net48" />
-    <file src="src\xfnet\bin\$configuration$\xfnet.xml" target="lib\net48" />
+    <file src="src\xfnet\bin\$configuration$\XenForoSharp.dll" target="lib\net48" />
+    <file src="src\xfnet\bin\$configuration$\XenForoSharp.xml" target="lib\net48" />
     <file src="README.md" />
     <file src="CHANGELOG.md" />
     <file src="LICENSE" />
+    <file src="assets\package-icon.png" target="images\" />
     <file src="examples\**\*.*" target="examples" />
   </files>
 </package>

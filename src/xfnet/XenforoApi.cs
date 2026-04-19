@@ -1,7 +1,7 @@
-using System;
-using xfnet.Routes;
+﻿using System;
+using XenForoSharp.Routes;
 
-namespace xfnet
+namespace XenForoSharp
 {
     public class XenforoApi
     {
@@ -80,3 +80,4 @@ namespace xfnet
         }
     }
 }
+

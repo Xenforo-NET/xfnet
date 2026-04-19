@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     public class UserAlert
     {
@@ -109,3 +109,4 @@ namespace xfnet.XfModels
         public DateTime? ViewDate { get; set; }
     }
 }
+

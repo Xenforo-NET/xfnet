@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: ConversationMessage. See https://xenforo.com/community/pages/api-endpoints/#type_ConversationMessage.
@@ -98,3 +98,4 @@ namespace xfnet.XfModels
         public User User { get; set; }
     }
 }
+

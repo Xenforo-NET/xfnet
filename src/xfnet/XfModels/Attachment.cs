@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: Attachment. See https://xenforo.com/community/pages/api-endpoints/#type_Attachment.
@@ -67,3 +67,4 @@ namespace xfnet.XfModels
         public long? ViewCount { get; set; }
     }
 }
+

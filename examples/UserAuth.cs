@@ -1,7 +1,7 @@
-using System;
-using xfnet;
+﻿using System;
+using XenForoSharp;
 
-namespace xfnet.examples
+namespace XenForoSharp.examples
 {
     internal static class UserAuth
     {
@@ -41,3 +41,4 @@ namespace xfnet.examples
         }
     }
 }
+

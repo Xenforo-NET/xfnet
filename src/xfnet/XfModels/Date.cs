@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     public class XfDate
     {
@@ -14,3 +14,4 @@ namespace xfnet.XfModels
         public int? Day { get; set; }
     }
 }
+

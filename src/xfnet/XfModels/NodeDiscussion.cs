@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     public class NodeDiscussion
     {
@@ -15,3 +15,4 @@ namespace xfnet.XfModels
         public bool? AllowAnswerDownvote { get; set; }
     }
 }
+

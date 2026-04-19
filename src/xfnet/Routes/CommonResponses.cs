@@ -1,7 +1,7 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace xfnet.Routes
+namespace XenForoSharp.Routes
 {
     public class SuccessResponse
     {
@@ -24,3 +24,4 @@ namespace xfnet.Routes
         public string Url;
     }
 }
+

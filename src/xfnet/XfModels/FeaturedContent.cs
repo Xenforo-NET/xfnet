@@ -1,7 +1,7 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: FeaturedContent. See https://docs.xenforo.com/api.
@@ -136,3 +136,4 @@ namespace xfnet.XfModels
         public User ContentUser { get; set; }
     }
 }
+

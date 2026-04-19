@@ -1,6 +1,7 @@
-# xfnet
+# XenForoSharp
 
 [![Build](https://github.com/Xenforo-NET/xfnet/actions/workflows/ci.yml/badge.svg)](https://github.com/Xenforo-NET/xfnet/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/XenForoSharp.svg)](https://www.nuget.org/packages/XenForoSharp/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Typed XenForo REST API client for .NET Framework 4.8.
@@ -9,13 +10,27 @@ Typed XenForo REST API client for .NET Framework 4.8.
 
 ## What is this?
 
-`xfnet` wraps the XenForo REST API in a clean, route-based client with strongly typed models. No stringly-typed nonsense - just call the route, get a model back, move on.
+`XenForoSharp` wraps the XenForo REST API in a clean, route-based client with strongly typed models. No stringly-typed nonsense - just call the route, get a model back, move on.
 
 ---
 
 ## Getting Started
 
-### Add to your project
+### Install from NuGet
+
+Package page: [XenForoSharp on NuGet](https://www.nuget.org/packages/XenForoSharp/)
+
+```xml
+<PackageReference Include="XenForoSharp" Version="1.0.0" />
+```
+
+```powershell
+Install-Package XenForoSharp
+```
+
+If you're using the repository directly:
+
+### Add as a project reference
 
 ```xml
 <ProjectReference Include="src\xfnet\xfnet.csproj" />
@@ -82,27 +97,10 @@ See [examples/README.md](examples/README.md) for runnable examples:
 
 ---
 
-## NuGet Package
-
-```powershell
-# Bump version across the project
-.\build\set-version.ps1 -Version 1.0.0
-
-# Build and pack
-.\build\pack.ps1 -Configuration Release -Version 1.0.0
-```
-
-Output goes to `artifacts`. Publishing is manual, there's no automatic push from CI.
-
-See [RELEASING.md](RELEASING.md) for the full release process.
-
----
-
 ## Notes
 
 - The client is currently synchronous.
 - XML docs are generated on build, so IntelliSense works out of the box.
-- NuGet metadata lives in [src/xfnet/xfnet.nuspec](src/xfnet/xfnet.nuspec).
 
 ---
 

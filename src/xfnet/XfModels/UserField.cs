@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     /// <summary>
     /// Data type: UserField. See https://xenforo.com/community/pages/api-endpoints/#type_UserField.
@@ -48,3 +48,4 @@ namespace xfnet.XfModels
         public string DisplayGroup { get; set; }
     }
 }
+

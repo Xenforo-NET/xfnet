@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using xfnet;
+using XenForoSharp;
 
-namespace xfnet.examples
+namespace XenForoSharp.examples
 {
     internal static class Users
     {
@@ -32,3 +32,4 @@ namespace xfnet.examples
         }
     }
 }
+

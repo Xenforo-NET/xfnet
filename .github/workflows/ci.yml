@@ -13,13 +13,37 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
+      - name: Add MSBuild to PATH
+        shell: pwsh
+        run: |
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
+          if (-not (Test-Path $vswhere))
+          {
+            throw "vswhere.exe was not found."
+          }
 
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v2
+          $msbuild = & $vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe | Select-Object -First 1
+          if (-not $msbuild)
+          {
+            throw "MSBuild.exe was not found."
+          }
+
+          Split-Path $msbuild -Parent | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Add NuGet to PATH
+        shell: pwsh
+        run: |
+          $nuget = (Get-Command nuget.exe -ErrorAction SilentlyContinue | Select-Object -First 1).Source
+
+          if (-not $nuget)
+          {
+            $nuget = Join-Path $env:RUNNER_TEMP 'nuget.exe'
+            Invoke-WebRequest 'https://dist.nuget.org/win-x86-commandline/latest/nuget.exe' -OutFile $nuget
+          }
+
+          Split-Path $nuget -Parent | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Restore packages
         run: nuget restore src\xfnet.sln

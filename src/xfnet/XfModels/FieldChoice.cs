@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace xfnet.XfModels
+namespace XenForoSharp.XfModels
 {
     public class FieldChoice
     {
@@ -11,3 +11,4 @@ namespace xfnet.XfModels
         public string Option { get; set; }
     }
 }
+

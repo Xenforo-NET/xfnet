@@ -7,8 +7,8 @@
     <ProjectGuid>{8B046021-26C9-4601-AEDA-5EB62B51DD43}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>xfnet</RootNamespace>
-    <AssemblyName>xfnet</AssemblyName>
+    <RootNamespace>XenForoSharp</RootNamespace>
+    <AssemblyName>XenForoSharp</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>bin\Debug\xfnet.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\XenForoSharp.xml</DocumentationFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <NoWarn>1591</NoWarn>
     <ErrorReport>prompt</ErrorReport>
@@ -28,7 +28,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>bin\Release\xfnet.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\XenForoSharp.xml</DocumentationFile>
     <DefineConstants>TRACE</DefineConstants>
     <NoWarn>1591</NoWarn>
     <ErrorReport>prompt</ErrorReport>

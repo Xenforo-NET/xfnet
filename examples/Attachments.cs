@@ -1,7 +1,7 @@
-using System.IO;
-using xfnet;
+﻿using System.IO;
+using XenForoSharp;
 
-namespace xfnet.examples
+namespace XenForoSharp.examples
 {
     internal static class Attachments
     {
@@ -30,3 +30,4 @@ namespace xfnet.examples
         }
     }
 }
+

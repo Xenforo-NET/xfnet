@@ -1,11 +1,11 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace xfnet.Routes
+namespace XenForoSharp.Routes
 {
     public abstract class RouteBase
     {
@@ -143,3 +143,4 @@ namespace xfnet.Routes
         }
     }
 }
+
