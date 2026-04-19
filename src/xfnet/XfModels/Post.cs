@@ -9,6 +9,9 @@ namespace xfnet.XfModels
     /// </summary>
     public class Post
     {
+        long? _postDateUnix;
+        long? _lastEditDateUnix;
+
         [JsonProperty("username")]
         public string Username { get; set; }
 
@@ -114,10 +117,10 @@ namespace xfnet.XfModels
         [JsonProperty("post_date")]
         public long? PostDateUnix
         {
-            get { return PostDateUnix; }
+            get { return _postDateUnix; }
             set
             {
-                PostDateUnix = value;
+                _postDateUnix = value;
                 if (!value.HasValue)
                     PostDate = null;
                 else
@@ -125,13 +128,21 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? PostDate { get; set; }
 
         [JsonProperty("message")]
         public string Message { get; set; }
 
         [JsonProperty("message_state")]
-        public string MssageState { get; set; }
+        public string MessageState { get; set; }
+
+        [JsonIgnore]
+        public string MssageState
+        {
+            get { return MessageState; }
+            set { MessageState = value; }
+        }
 
         [JsonProperty("attach_count")]
         public long? AttachCount { get; set; }
@@ -145,10 +156,10 @@ namespace xfnet.XfModels
         [JsonProperty("last_edit_date")]
         public long? LastEditDateUnix
         {
-            get { return LastEditDateUnix; }
+            get { return _lastEditDateUnix; }
             set
             {
-                LastEditDateUnix = value;
+                _lastEditDateUnix = value;
                 if (!value.HasValue)
                     LastEditDate = null;
                 else
@@ -156,6 +167,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? LastEditDate { get; set; }
 
         [JsonProperty("reaction_score")]

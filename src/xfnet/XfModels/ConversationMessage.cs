@@ -9,6 +9,8 @@ namespace xfnet.XfModels
     /// </summary>
     public class ConversationMessage
     {
+        long? _messageDateUnix;
+
         [JsonProperty("username")]
         public string Username { get; set; }
 
@@ -66,10 +68,10 @@ namespace xfnet.XfModels
         [JsonProperty("message_date")]
         public long? MessageDateUnix
         {
-            get { return MessageDateUnix; }
+            get { return _messageDateUnix; }
             set
             {
-                MessageDateUnix = value;
+                _messageDateUnix = value;
                 if (!value.HasValue)
                     MessageDate = null;
                 else
@@ -77,6 +79,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? MessageDate { get; set; }
 
         [JsonProperty("user_id")]

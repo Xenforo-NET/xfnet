@@ -8,13 +8,15 @@ namespace xfnet.XfModels
     /// </summary>
     public class Page
     {
+        long? _publishDateUnix;
+
         [JsonProperty("publish_date")]
         public long? PublishDateUnix
         {
-            get { return PublishDateUnix; }
+            get { return _publishDateUnix; }
             set
             {
-                PublishDateUnix = value;
+                _publishDateUnix = value;
                 if (!value.HasValue)
                     PublishDate = null;
                 else
@@ -22,6 +24,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? PublishDate { get; set; }
 
         [JsonProperty("view_count")]

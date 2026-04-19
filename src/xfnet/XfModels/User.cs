@@ -9,6 +9,9 @@ namespace xfnet.XfModels
     /// </summary>
     public class User
     {
+        XfDate _dateOfBirthUnix;
+        long? _registerDateUnix;
+
         /// <summary>
         /// (Verbose results only) Returned only if permissions are met.
         /// </summary>
@@ -132,14 +135,15 @@ namespace xfnet.XfModels
         [JsonProperty("dob")]
         public XfDate DateOfBirthUnix
         {
-            get { return DateOfBirthUnix; }
+            get { return _dateOfBirthUnix; }
             set
             {
-                DateOfBirthUnix = value;
+                _dateOfBirthUnix = value;
                 DateOfBirth = Utilities.DateConvert.XfDateToDateTime(value);
             }
         }
 
+        [JsonIgnore]
         public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
@@ -319,10 +323,10 @@ namespace xfnet.XfModels
         [JsonProperty("register_date")]
         public long? RegisterDateUnix
         {
-            get { return RegisterDateUnix; }
+            get { return _registerDateUnix; }
             set
             {
-                RegisterDateUnix = value;
+                _registerDateUnix = value;
                 if (!value.HasValue)
                     RegisterDate = null;
                 else
@@ -330,6 +334,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? RegisterDate { get; set; }
 
         [JsonProperty("trophy_points")]

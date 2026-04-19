@@ -9,6 +9,10 @@ namespace xfnet.XfModels
     /// </summary>
     public class ProfilePost
     {
+        long? _postDateUnix;
+        long? _firstCommentDateUnix;
+        long? _lastCommentDateUnix;
+
         [JsonProperty("username")]
         public string Username { get; set; }
 
@@ -78,10 +82,10 @@ namespace xfnet.XfModels
         [JsonProperty("post_date")]
         public long? PostDateUnix
         {
-            get { return PostDateUnix; }
+            get { return _postDateUnix; }
             set
             {
-                PostDateUnix = value;
+                _postDateUnix = value;
                 if (!value.HasValue)
                     PostDate = null;
                 else
@@ -89,6 +93,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? PostDate { get; set; }
 
         [JsonProperty("message")]
@@ -106,10 +111,10 @@ namespace xfnet.XfModels
         [JsonProperty("first_comment_date")]
         public long? FirstCommentDateUnix
         {
-            get { return FirstCommentDateUnix; }
+            get { return _firstCommentDateUnix; }
             set
             {
-                FirstCommentDateUnix = value;
+                _firstCommentDateUnix = value;
                 if (!value.HasValue)
                     FirstCommentDate = null;
                 else
@@ -117,15 +122,16 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? FirstCommentDate { get; set; }
 
         [JsonProperty("last_comment_date")]
         public long? LastCommentDateUnix
         {
-            get { return LastCommentDateUnix; }
+            get { return _lastCommentDateUnix; }
             set
             {
-                LastCommentDateUnix = value;
+                _lastCommentDateUnix = value;
                 if (!value.HasValue)
                     LastCommentDate = null;
                 else
@@ -133,6 +139,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? LastCommentDate { get; set; }
 
         [JsonProperty("reaction_score")]

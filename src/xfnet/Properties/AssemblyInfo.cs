@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
 [assembly: AssemblyTitle("xfnet")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Typed XenForo API client for .NET Framework 4.8.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Xenforo-NET")]
 [assembly: AssemblyProduct("xfnet")]
-[assembly: AssemblyCopyright("Copyright ©  2022")]
+[assembly: AssemblyCopyright("Copyright © Xenforo-NET")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

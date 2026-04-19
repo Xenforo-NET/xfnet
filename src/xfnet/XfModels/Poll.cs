@@ -10,6 +10,8 @@ namespace xfnet.XfModels
     /// </summary>
     public class Poll
     {
+        long? _closeDateUnix;
+
         [JsonProperty("can_vote")]
         public bool? CanVote { get; set; }
 
@@ -17,29 +19,30 @@ namespace xfnet.XfModels
         public bool? HasVoted { get; set; }
 
         [JsonProperty("responses")]
-        public Dictionary<string, PollResponse> _responses {
-            set 
-            { 
-                _responses = value;
-                _list_responses = value.Values.ToList();
-            } 
+        public Dictionary<string, PollResponse> ResponsesMap
+        {
+            set
+            {
+                if (value == null)
+                    Responses = null;
+                else
+                    Responses = value.Values.ToList();
+            }
         }
-
-        private List<PollResponse> _list_responses { get; set; }
 
         /// <summary>
         /// List of possible responses with text, vote count (if visible) and whether the API user has voted for each.
         /// </summary>
+        [JsonIgnore]
         public List<PollResponse> Responses { 
             get 
             { 
-                return _list_responses;
+                return _responses;
             }
-            set
-            {
-                Responses = value;
-            }
+            set { _responses = value; }
         }
+
+        List<PollResponse> _responses;
 
         [JsonProperty("poll_id")]
         public long? PollId { get; set; }
@@ -59,10 +62,10 @@ namespace xfnet.XfModels
         [JsonProperty("close_date")]
         public long? CloseDateUnix
         {
-            get { return CloseDateUnix; }
+            get { return _closeDateUnix; }
             set
             {
-                CloseDateUnix = value;
+                _closeDateUnix = value;
                 if (!value.HasValue)
                     CloseDate = null;
                 else
@@ -70,6 +73,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? CloseDate { get; set; }
 
         [JsonProperty("change_vote")]

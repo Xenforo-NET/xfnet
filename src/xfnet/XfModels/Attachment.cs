@@ -8,6 +8,8 @@ namespace xfnet.XfModels
     /// </summary>
     public class Attachment
     {
+        long? _attachDateUnix;
+
         [JsonProperty("filename")]
         public string Filename { get; set; }
 
@@ -22,6 +24,9 @@ namespace xfnet.XfModels
 
         [JsonProperty("thumbnail_url")]
         public string ThumbnailUrl { get; set; }
+
+        [JsonProperty("retina_thumbnail_url")]
+        public string RetinaThumbnailUrl { get; set; }
 
         [JsonProperty("direct_url")]
         public string DirectUrl { get; set; }
@@ -44,10 +49,10 @@ namespace xfnet.XfModels
         [JsonProperty("attach_date")]
         public long? AttachDateUnix
         {
-            get { return AttachDateUnix; }
+            get { return _attachDateUnix; }
             set
             {
-                AttachDateUnix = value;
+                _attachDateUnix = value;
                 if (!value.HasValue)
                     AttachDate = null;
                 else
@@ -55,6 +60,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? AttachDate { get; set; }
 
         [JsonProperty("view_count")]

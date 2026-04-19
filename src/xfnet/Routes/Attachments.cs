@@ -1,27 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RestSharp;
 using Newtonsoft.Json;
+using RestSharp;
+using System.Collections.Generic;
 
 namespace xfnet.Routes
 {
-    public class Attachments
+    public class Attachments : RouteBase
     {
-        readonly string xfToken;
-        readonly bool isVerbose;
-        readonly string baseUrl;
-
-        readonly RestClient _client;
-
-        public Attachments(string xfToken, bool isVerbose, string baseUrl)
-        {
-            this.xfToken = xfToken;
-            this.isVerbose = isVerbose;
-            this.baseUrl = baseUrl;
-
-            this._client = new RestClient(this.baseUrl);
-        }
+        public Attachments(string xfToken, bool isVerbose, string baseUrl) : base(xfToken, isVerbose, baseUrl) { }
 
         /// <summary>
         /// Gets the attachments associated with the provided API attachment key. Only returns attachments that have not been associated with content.
@@ -31,17 +16,10 @@ namespace xfnet.Routes
         /// <returns></returns>
         public AttachmentsResponse<T> GetAll<T>(string attachment_key) where T : XfModels.Attachment
         {
-            RestRequest request = new RestRequest("attachments", Method.Get);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
+            RestRequest request = CreateRequest("attachments", Method.Get);
+            AddParameter(request, "key", attachment_key);
 
-            request.AddParameter("key", attachment_key);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<AttachmentsResponseVerbose<T>>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<AttachmentsResponse<T>>(encoding.GetString(response.RawBytes));
+            return Execute<AttachmentsResponse<T>>(request);
         }
 
         /// <summary>
@@ -51,17 +29,10 @@ namespace xfnet.Routes
         /// <returns></returns>
         public AttachmentsResponse GetAll(string attachment_key)
         {
-            RestRequest request = new RestRequest("attachments", Method.Get);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
+            RestRequest request = CreateRequest("attachments", Method.Get);
+            AddParameter(request, "key", attachment_key);
 
-            request.AddParameter("key", attachment_key);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<AttachmentsResponseVerbose>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<AttachmentsResponse>(encoding.GetString(response.RawBytes));
+            return Execute<AttachmentsResponse>(request);
         }
 
         /// <summary>
@@ -74,18 +45,11 @@ namespace xfnet.Routes
         /// <returns></returns>
         public AttachmentResponse<T> Upload<T>(string attachment_key, byte[] file_bytes, string file_name) where T : XfModels.Attachment
         {
-            RestRequest request = new RestRequest("attachments", Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
+            RestRequest request = CreateRequest("attachments", Method.Post);
+            AddParameter(request, "key", attachment_key);
+            AddFile(request, "attachment", file_bytes, file_name);
 
-            request.AddParameter("key", attachment_key);
-            request.AddFile("attachment", file_bytes, file_name);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<AttachmentResponse<T>>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<AttachmentResponseVerbose<T>>(encoding.GetString(response.RawBytes));
+            return Execute<AttachmentResponse<T>>(request);
         }
 
         /// <summary>
@@ -97,18 +61,11 @@ namespace xfnet.Routes
         /// <returns></returns>
         public AttachmentResponse Upload(string attachment_key, byte[] file_bytes, string file_name)
         {
-            RestRequest request = new RestRequest("attachments", Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
+            RestRequest request = CreateRequest("attachments", Method.Post);
+            AddParameter(request, "key", attachment_key);
+            AddFile(request, "attachment", file_bytes, file_name);
 
-            request.AddParameter("key", attachment_key);
-            request.AddFile("attachment", file_bytes, file_name);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<AttachmentResponse>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<AttachmentResponseVerbose>(encoding.GetString(response.RawBytes));
+            return Execute<AttachmentResponse>(request);
         }
 
         /// <summary>
@@ -120,43 +77,14 @@ namespace xfnet.Routes
         /// <param name="file_bytes">The attachment file bytes.</param>
         /// <param name="file_name">The attachment file name.</param>
         /// <returns></returns>
-        public CreateNewAttachmentKeyResponse<T> CreateNewKey<T>(string type, Dictionary<string, string> context, byte[] file_bytes, string file_name) where T : XfModels.Attachment
+        public CreateNewAttachmentKeyResponse<T> CreateNewKey<T>(string type, Dictionary<string, string> context = null, byte[] file_bytes = null, string file_name = null) where T : XfModels.Attachment
         {
-            RestRequest request = new RestRequest("attachments/new-key", Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
+            RestRequest request = CreateRequest("attachments/new-key", Method.Post);
+            AddParameter(request, "type", type);
+            AddJsonParameter(request, "context", context);
+            AddFile(request, "attachment", file_bytes, file_name);
 
-            request.AddParameter("type", type);
-            request.AddParameter("context", JsonConvert.SerializeObject(context));
-            request.AddFile("attachment", file_bytes, file_name);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<CreateNewAttachmentKeyResponse<T>>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<CreateNewAttachmentKeyResponseVerbose<T>>(encoding.GetString(response.RawBytes));
-        }
-
-        /// <summary>
-        /// Creates a new attachment key, allowing attachments to be uploaded separately from the related content.
-        /// </summary>
-        /// <typeparam name="T">A class that inherits XfModels.Attachment.</typeparam>
-        /// <param name="type">The content type of the attachment. Default types include post, conversation_message. Add-ons may add more.</param>
-        /// <param name="context">Key-value pairs representing the context of the attachment. This will vary depending on content type and the action being taken. See relevant actions for further details.</param>
-        /// <returns></returns>
-        public CreateNewAttachmentKeyResponse<T> CreateNewKey<T>(string type, Dictionary<string, string> context) where T : XfModels.Attachment
-        {
-            RestRequest request = new RestRequest("attachments/new-key", Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
-
-            request.AddParameter("type", type);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<CreateNewAttachmentKeyResponse<T>>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<CreateNewAttachmentKeyResponseVerbose<T>>(encoding.GetString(response.RawBytes));
+            return Execute<CreateNewAttachmentKeyResponse<T>>(request);
         }
 
         /// <summary>
@@ -167,42 +95,14 @@ namespace xfnet.Routes
         /// <param name="file_bytes">The attachment file bytes.</param>
         /// <param name="file_name">The attachment file name.</param>
         /// <returns></returns>
-        public CreateNewAttachmentKeyResponse CreateNewKey(string type, Dictionary<string, string> context, byte[] file_bytes, string file_name)
+        public CreateNewAttachmentKeyResponse CreateNewKey(string type, Dictionary<string, string> context = null, byte[] file_bytes = null, string file_name = null)
         {
-            RestRequest request = new RestRequest("attachments/new-key", Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
+            RestRequest request = CreateRequest("attachments/new-key", Method.Post);
+            AddParameter(request, "type", type);
+            AddJsonParameter(request, "context", context);
+            AddFile(request, "attachment", file_bytes, file_name);
 
-            request.AddParameter("type", type);
-            request.AddParameter("context", JsonConvert.SerializeObject(context));
-            request.AddFile("attachment", file_bytes, file_name);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<CreateNewAttachmentKeyResponse>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<CreateNewAttachmentKeyResponseVerbose>(encoding.GetString(response.RawBytes));
-        }
-
-        /// <summary>
-        /// Creates a new attachment key, allowing attachments to be uploaded separately from the related content.
-        /// </summary>
-        /// <param name="type">The content type of the attachment. Default types include post, conversation_message. Add-ons may add more.</param>
-        /// <param name="context">Key-value pairs representing the context of the attachment. This will vary depending on content type and the action being taken. See relevant actions for further details.</param>
-        /// <returns></returns>
-        public CreateNewAttachmentKeyResponse CreateNewKey(string type, Dictionary<string, string> context)
-        {
-            RestRequest request = new RestRequest("attachments/new-key", Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
-
-            request.AddParameter("type", type);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<CreateNewAttachmentKeyResponse>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<CreateNewAttachmentKeyResponseVerbose>(encoding.GetString(response.RawBytes));
+            return Execute<CreateNewAttachmentKeyResponse>(request);
         }
 
         /// <summary>
@@ -211,17 +111,10 @@ namespace xfnet.Routes
         /// <typeparam name="T">A class that inherits XfModels.Attachment.</typeparam>
         /// <param name="id">Attachment id.</param>
         /// <returns></returns>
-        public AttachmentResponse<T> GetById<T>(int id) where T : XfModels.Attachment
+        public AttachmentResponse<T> GetById<T>(long id) where T : XfModels.Attachment
         {
-            RestRequest request = new RestRequest($"attachments/{id}", Method.Get);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<AttachmentResponse<T>>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<AttachmentResponseVerbose<T>>(encoding.GetString(response.RawBytes));
+            RestRequest request = CreateRequest("attachments/" + id, Method.Get);
+            return Execute<AttachmentResponse<T>>(request);
         }
 
         /// <summary>
@@ -229,17 +122,10 @@ namespace xfnet.Routes
         /// </summary>
         /// <param name="id">Attachment id.</param>
         /// <returns></returns>
-        public AttachmentResponse GetById(int id)
+        public AttachmentResponse GetById(long id)
         {
-            RestRequest request = new RestRequest($"attachments/{id}", Method.Get);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<AttachmentResponse>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<AttachmentResponseVerbose>(encoding.GetString(response.RawBytes));
+            RestRequest request = CreateRequest("attachments/" + id, Method.Get);
+            return Execute<AttachmentResponse>(request);
         }
 
         /// <summary>
@@ -247,17 +133,10 @@ namespace xfnet.Routes
         /// </summary>
         /// <param name="id">Attachment id.</param>
         /// <returns></returns>
-        public AttachmentSuccessResponse DeleteById(int id)
+        public SuccessResponse DeleteById(long id)
         {
-            RestRequest request = new RestRequest($"attachments/{id}", Method.Delete);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<AttachmentSuccessResponse>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<AttachmentSuccessResponseVerbose>(encoding.GetString(response.RawBytes));
+            RestRequest request = CreateRequest("attachments/" + id, Method.Delete);
+            return Execute<SuccessResponse>(request);
         }
 
         /// <summary>
@@ -265,17 +144,29 @@ namespace xfnet.Routes
         /// </summary>
         /// <param name="id">Attachment id.</param>
         /// <returns></returns>
-        public AttachmentBinaryResponse GetBinaryById(int id)
+        public AttachmentBinaryResponse GetBinaryById(long id)
         {
-            RestRequest request = new RestRequest($"attachments/{id}/data", Method.Get);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
+            RestRequest request = CreateRequest("attachments/" + id + "/data", Method.Get);
+            RestResponse response = Execute(request);
 
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
+            if (!string.IsNullOrWhiteSpace(response.Content))
+                return Deserialize<AttachmentBinaryResponse>(response);
 
-            if (isVerbose) return JsonConvert.DeserializeObject<AttachmentBinaryResponse>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<AttachmentBinaryResponseVerbose>(encoding.GetString(response.RawBytes));
+            return new AttachmentBinaryResponse
+            {
+                Data = response.RawBytes
+            };
+        }
+
+        /// <summary>
+        /// Gets the URL to the attachment's retina thumbnail, if it has one. URL returned via a 301 redirect.
+        /// </summary>
+        /// <param name="id">Attachment id.</param>
+        /// <returns></returns>
+        public UrlResponse GetRetinaUrlById(long id)
+        {
+            RestRequest request = CreateRequest("attachments/" + id + "/retina-thumbnail", Method.Get);
+            return ExecuteUrl(request);
         }
 
         /// <summary>
@@ -283,17 +174,10 @@ namespace xfnet.Routes
         /// </summary>
         /// <param name="id">Attachment id.</param>
         /// <returns></returns>
-        public AttachmentUrlResponse GetUrlById(int id)
+        public UrlResponse GetUrlById(long id)
         {
-            RestRequest request = new RestRequest($"attachments/{id}/thumbnail", Method.Get);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<AttachmentUrlResponse>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<AttachmentUrlResponseVerbose>(encoding.GetString(response.RawBytes));
+            RestRequest request = CreateRequest("attachments/" + id + "/thumbnail", Method.Get);
+            return ExecuteUrl(request);
         }
 
         #region TemplateClasses
@@ -301,10 +185,7 @@ namespace xfnet.Routes
         {
             [JsonProperty("attachments")]
             public List<T> Attachments;
-        }
 
-        public class AttachmentsResponseVerbose<T> : AttachmentsResponse<T> where T : XfModels.Attachment
-        {
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }
@@ -313,10 +194,7 @@ namespace xfnet.Routes
         {
             [JsonProperty("attachment")]
             public T Attachment;
-        }
 
-        public class AttachmentResponseVerbose<T> : AttachmentResponse<T> where T : XfModels.Attachment
-        {
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }
@@ -328,10 +206,7 @@ namespace xfnet.Routes
 
             [JsonProperty("key")]
             public string Key;
-        }
 
-        public class CreateNewAttachmentKeyResponseVerbose<T> : CreateNewAttachmentKeyResponse<T> where T : XfModels.Attachment
-        {
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }
@@ -342,10 +217,7 @@ namespace xfnet.Routes
         {
             [JsonProperty("attachments")]
             public List<XfModels.Attachment> Attachments;
-        }
 
-        public class AttachmentsResponseVerbose : AttachmentsResponse
-        {
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }
@@ -354,10 +226,7 @@ namespace xfnet.Routes
         {
             [JsonProperty("attachment")]
             public XfModels.Attachment Attachment;
-        }
 
-        public class AttachmentResponseVerbose : AttachmentResponse
-        {
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }
@@ -369,48 +238,15 @@ namespace xfnet.Routes
 
             [JsonProperty("key")]
             public string Key;
-        }
 
-        public class CreateNewAttachmentKeyResponseVerbose : CreateNewAttachmentKeyResponse
-        {
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }
 
-        public class AttachmentSuccessResponse
+        public class AttachmentBinaryResponse : SuccessResponse
         {
-            [JsonProperty("success")]
-            public bool Success;
-        }
-
-        public class AttachmentSuccessResponseVerbose : AttachmentSuccessResponse
-        {
-            [JsonProperty("errors")]
-            public List<XfModels.Error> Errors;
-        }
-
-        public class AttachmentBinaryResponse
-        {
-            [JsonProperty("data")]
+            [JsonIgnore]
             public byte[] Data;
-        }
-
-        public class AttachmentBinaryResponseVerbose : AttachmentBinaryResponse
-        {
-            [JsonProperty("errors")]
-            public List<XfModels.Error> Errors;
-        }
-
-        public class AttachmentUrlResponse
-        {
-            [JsonProperty("url")]
-            public string Url;
-        }
-
-        public class AttachmentUrlResponseVerbose : AttachmentUrlResponse
-        {
-            [JsonProperty("errors")]
-            public List<XfModels.Error> Errors;
         }
         #endregion
     }

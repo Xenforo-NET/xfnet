@@ -1,30 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RestSharp;
 using Newtonsoft.Json;
+using RestSharp;
+using System.Collections.Generic;
 
 namespace xfnet.Routes
 {
-    public class Alerts
+    public class Alerts : RouteBase
     {
-        readonly string xfToken;
-        readonly bool isVerbose;
-        readonly string baseUrl;
-
-        readonly RestClient _client;
-
-        public Alerts(string xfToken, bool isVerbose, string baseUrl)
-        {
-            this.xfToken = xfToken;
-            this.isVerbose = isVerbose;
-            this.baseUrl = baseUrl;
-
-            this._client = new RestClient(this.baseUrl);
-        }
+        public Alerts(string xfToken, bool isVerbose, string baseUrl) : base(xfToken, isVerbose, baseUrl) { }
 
         /// <summary>
-        /// Gets the API user's list of alerts
+        /// Gets the API user's list of alerts.
         /// </summary>
         /// <typeparam name="T">A class that inherits XfModels.UserAlert.</typeparam>
         /// <param name="page"></param>
@@ -32,49 +17,34 @@ namespace xfnet.Routes
         /// <param name="unviewed">If true, gets only unviewed alerts. Unviewed alerts have not been seen (in the standard UI).</param>
         /// <param name="unread">If true, gets only unread alerts. Unread alerts may have been seen but the content they relate to has not been viewed.</param>
         /// <returns></returns>
-        public UserAlertsResponse<T> GetAll<T>(long page = 0, long cutoff = 0, bool unviewed = false, bool unread = false) where T : XfModels.UserAlert
+        public UserAlertsResponse<T> GetAll<T>(long? page = null, long? cutoff = null, bool? unviewed = null, bool? unread = null) where T : XfModels.UserAlert
         {
-            RestRequest request = new RestRequest("alerts", Method.Get);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
-            
-            request.AddParameter("page", page);
-            request.AddParameter("cutoff", cutoff);
-            request.AddParameter("unviewed", unviewed);
-            request.AddParameter("unread", unread);
+            RestRequest request = CreateRequest("alerts", Method.Get);
+            AddParameter(request, "page", page);
+            AddParameter(request, "cutoff", cutoff);
+            AddParameter(request, "unviewed", unviewed);
+            AddParameter(request, "unread", unread);
 
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<UserAlertsResponseVerbose<T>>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<UserAlertsResponse<T>>(encoding.GetString(response.RawBytes));
+            return Execute<UserAlertsResponse<T>>(request);
         }
 
         /// <summary>
-        /// Gets the API user's list of alerts
+        /// Gets the API user's list of alerts.
         /// </summary>
-        /// <param name = "page" ></ param >
+        /// <param name="page"></param>
         /// <param name="cutoff">Unix timestamp of oldest alert to include. Note that unread or unviewed alerts are always included.</param>
         /// <param name="unviewed">If true, gets only unviewed alerts. Unviewed alerts have not been seen (in the standard UI).</param>
         /// <param name="unread">If true, gets only unread alerts. Unread alerts may have been seen but the content they relate to has not been viewed.</param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public UserAlertsResponse GetAll(long page = 0, long cutoff = 0, bool unviewed = false, bool unread = false)
+        public UserAlertsResponse GetAll(long? page = null, long? cutoff = null, bool? unviewed = null, bool? unread = null)
         {
-            RestRequest request = new RestRequest("alerts", Method.Get);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
+            RestRequest request = CreateRequest("alerts", Method.Get);
+            AddParameter(request, "page", page);
+            AddParameter(request, "cutoff", cutoff);
+            AddParameter(request, "unviewed", unviewed);
+            AddParameter(request, "unread", unread);
 
-            request.AddParameter("page", page);
-            request.AddParameter("cutoff", cutoff);
-            request.AddParameter("unviewed", unviewed);
-            request.AddParameter("unread", unread);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<UserAlertsResponseVerbose>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<UserAlertsResponse>(encoding.GetString(response.RawBytes));
+            return Execute<UserAlertsResponse>(request);
         }
 
         /// <summary>
@@ -86,23 +56,16 @@ namespace xfnet.Routes
         /// <param name="link_url">URL user will be taken to when the alert is clicked.</param>
         /// <param name="link_title">Text of the link URL that will be displayed. If no placeholder is present in the alert, will be automatically appended.</param>
         /// <returns></returns>
-        public UserAlertsSuccessResponse SendToUser(long to_user_id, string alert, long from_user_id = 0, string link_url = "", string link_title = "")
+        public SuccessResponse SendToUser(long to_user_id, string alert, long? from_user_id = null, string link_url = null, string link_title = null)
         {
-            RestRequest request = new RestRequest("alerts", Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
+            RestRequest request = CreateRequest("alerts", Method.Post);
+            AddParameter(request, "to_user_id", to_user_id);
+            AddParameter(request, "alert", alert);
+            AddParameter(request, "from_user_id", from_user_id);
+            AddParameter(request, "link_url", link_url);
+            AddParameter(request, "link_title", link_title);
 
-            request.AddParameter("to_user_id", to_user_id);
-            request.AddParameter("alert", alert);
-            request.AddParameter("from_user_id", from_user_id);
-            request.AddParameter("link_url", link_url);
-            request.AddParameter("link_title", link_title);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<UserAlertsSuccessResponse>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<UserAlertsSuccessResponse>(encoding.GetString(response.RawBytes));
+            return Execute<SuccessResponse>(request);
         }
 
         /// <summary>
@@ -111,20 +74,13 @@ namespace xfnet.Routes
         /// <param name="read">If specified, marks all alerts as read.</param>
         /// <param name="viewed">If specified, marks all alerts as viewed. This will remove the alert counter but keep unactioned alerts highlighted.</param>
         /// <returns></returns>
-        public UserAlertsSuccessResponse MarkAll(bool read = false, bool viewed = false)
+        public SuccessResponse MarkAll(bool? read = null, bool? viewed = null)
         {
-            RestRequest request = new RestRequest("alerts/mark-all", Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
+            RestRequest request = CreateRequest("alerts/mark-all", Method.Post);
+            AddParameter(request, "read", read);
+            AddParameter(request, "viewed", viewed);
 
-            request.AddParameter("read", read);
-            request.AddParameter("viewed", viewed);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<UserAlertsSuccessResponse>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<UserAlertsSuccessResponse>(encoding.GetString(response.RawBytes));
+            return Execute<SuccessResponse>(request);
         }
 
         /// <summary>
@@ -135,15 +91,8 @@ namespace xfnet.Routes
         /// <returns></returns>
         public UserAlertResponse<T> GetById<T>(long id) where T : XfModels.UserAlert
         {
-            RestRequest request = new RestRequest($"alerts/{id}", Method.Get);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<UserAlertResponseVerbose<T>>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<UserAlertResponse<T>>(encoding.GetString(response.RawBytes));
+            RestRequest request = CreateRequest("alerts/" + id, Method.Get);
+            return Execute<UserAlertResponse<T>>(request);
         }
 
         /// <summary>
@@ -153,28 +102,19 @@ namespace xfnet.Routes
         /// <returns></returns>
         public UserAlertResponse GetById(long id)
         {
-            RestRequest request = new RestRequest($"alerts/{id}", Method.Get);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<UserAlertResponseVerbose>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<UserAlertResponse>(encoding.GetString(response.RawBytes));
+            RestRequest request = CreateRequest("alerts/" + id, Method.Get);
+            return Execute<UserAlertResponse>(request);
         }
 
-        public UserAlertsSuccessResponse MarkById(long id)
+        /// <summary>
+        /// Marks the specified alert as read and viewed.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public SuccessResponse MarkById(long id)
         {
-            RestRequest request = new RestRequest($"alerts/{id}/mark", Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request.AddHeader("XF-Api-Key", xfToken);
-
-            RestResponse response = _client.Execute(request);
-            Encoding encoding = Encoding.GetEncoding("utf-8");
-
-            if (isVerbose) return JsonConvert.DeserializeObject<UserAlertsSuccessResponse>(encoding.GetString(response.RawBytes));
-            return JsonConvert.DeserializeObject<UserAlertsSuccessResponse>(encoding.GetString(response.RawBytes));
+            RestRequest request = CreateRequest("alerts/" + id + "/mark", Method.Post);
+            return Execute<SuccessResponse>(request);
         }
 
         #region TemplateClasses
@@ -182,10 +122,7 @@ namespace xfnet.Routes
         {
             [JsonProperty("alerts")]
             public List<T> Alerts;
-        }
 
-        public class UserAlertsResponseVerbose<T> : UserAlertsResponse<T> where T : XfModels.UserAlert
-        {
             [JsonProperty("pagination")]
             public XfModels.Pagination Pagination;
 
@@ -197,10 +134,7 @@ namespace xfnet.Routes
         {
             [JsonProperty("alert")]
             public T Alert;
-        }
 
-        public class UserAlertResponseVerbose<T> : UserAlertResponse<T> where T : XfModels.UserAlert
-        {
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }
@@ -211,25 +145,10 @@ namespace xfnet.Routes
         {
             [JsonProperty("alerts")]
             public List<XfModels.UserAlert> Alerts;
-        }
 
-        public class UserAlertsResponseVerbose : UserAlertsResponse
-        {
             [JsonProperty("pagination")]
             public XfModels.Pagination Pagination;
 
-            [JsonProperty("errors")]
-            public List<XfModels.Error> Errors;
-        }
-
-        public class UserAlertsSuccessResponse
-        {
-            [JsonProperty("success")]
-            public bool Success;
-        }
-
-        public class UserAlertsSuccessResponseVerbose : UserAlertsSuccessResponse
-        {
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }
@@ -238,10 +157,7 @@ namespace xfnet.Routes
         {
             [JsonProperty("alert")]
             public XfModels.UserAlert Alert;
-        }
 
-        public class UserAlertResponseVerbose : UserAlertResponse
-        {
             [JsonProperty("errors")]
             public List<XfModels.Error> Errors;
         }

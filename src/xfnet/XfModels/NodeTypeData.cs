@@ -5,6 +5,8 @@ namespace xfnet.XfModels
 {
     public class NodeTypeData
     {
+        long? _lastPostDateUnix;
+
         [JsonProperty("allow_posting")]
         public bool? AllowPosting { get; set; }
 
@@ -29,10 +31,10 @@ namespace xfnet.XfModels
         [JsonProperty("last_post_date")]
         public long? LastPostDateUnix
         {
-            get { return LastPostDateUnix; }
+            get { return _lastPostDateUnix; }
             set
             {
-                LastPostDateUnix = value;
+                _lastPostDateUnix = value;
                 if (!value.HasValue)
                     LastPostDate = null;
                 else
@@ -40,6 +42,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? LastPostDate { get; set; }
 
         [JsonProperty("last_post_id")]

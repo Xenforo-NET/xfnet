@@ -46,5 +46,11 @@ namespace xfnet.XfModels
         /// </summary>
         [JsonProperty("display_group")]
         public string DisplayGroup { get; set; }
+
+        [JsonProperty("filter_enabled")]
+        public bool? FilterEnabled { get; set; }
+
+        [JsonProperty("search_enabled")]
+        public bool? SearchEnabled { get; set; }
     }
 }

@@ -9,6 +9,9 @@ namespace xfnet.XfModels
     /// </summary>
     public class Thread
     {
+        long? _postDateUnix;
+        long? _lastPostDateUnix;
+
         [JsonProperty("username")]
         public string Username { get; set; }
 
@@ -72,6 +75,12 @@ namespace xfnet.XfModels
         [JsonProperty("highlighted_post_ids")]
         public List<long?> HighlightedPostIds { get; set; }
 
+        [JsonProperty("is_search_engine_indexable")]
+        public bool? IsSearchEngineIndexable { get; set; }
+
+        [JsonProperty("index_state")]
+        public string IndexState { get; set; }
+
         /// <summary>
         /// (Conditionally returned) If requested by context, the forum this thread was posted in.
         /// </summary>
@@ -129,10 +138,10 @@ namespace xfnet.XfModels
         [JsonProperty("post_date")]
         public long? PostDateUnix
         {
-            get { return PostDateUnix; }
+            get { return _postDateUnix; }
             set
             {
-                PostDateUnix = value;
+                _postDateUnix = value;
                 if (!value.HasValue)
                     PostDate = null;
                 else
@@ -140,6 +149,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? PostDate { get; set; }
 
         [JsonProperty("sticky")]
@@ -160,10 +170,10 @@ namespace xfnet.XfModels
         [JsonProperty("last_post_date")]
         public long? LastPostDateUnix
         {
-            get { return LastPostDateUnix; }
+            get { return _lastPostDateUnix; }
             set
             {
-                LastPostDateUnix = value;
+                _lastPostDateUnix = value;
                 if (!value.HasValue)
                     LastPostDate = null;
                 else
@@ -171,6 +181,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? LastPostDate { get; set; }
 
         [JsonProperty("last_post_id")]
@@ -187,6 +198,9 @@ namespace xfnet.XfModels
 
         [JsonProperty("prefix_id")]
         public long? PrefixId { get; set; }
+
+        [JsonProperty("featured")]
+        public bool? Featured { get; set; }
 
         [JsonProperty("User")]
         public User User { get; set; }

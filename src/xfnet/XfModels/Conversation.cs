@@ -9,6 +9,9 @@ namespace xfnet.XfModels
     /// </summary>
     public class Conversation
     {
+        long? _startDateUnix;
+        long? _lastMessageDateUnix;
+
         /// <summary>
         /// Name of the user that started the conversation.
         /// </summary>
@@ -60,10 +63,10 @@ namespace xfnet.XfModels
         [JsonProperty("start_date")]
         public long? StartDateUnix 
         { 
-            get { return StartDateUnix; } 
+            get { return _startDateUnix; } 
             set 
             { 
-                StartDateUnix = value;
+                _startDateUnix = value;
                 if (!value.HasValue)
                     StartDate = null;
                 else 
@@ -71,6 +74,7 @@ namespace xfnet.XfModels
             } 
         }
 
+        [JsonIgnore]
         public DateTime? StartDate { get; set; }
 
         [JsonProperty("open_invite")]
@@ -91,10 +95,10 @@ namespace xfnet.XfModels
         [JsonProperty("last_message_date")]
         public long? LastMessageDateUnix
         {
-            get { return LastMessageDateUnix; }
+            get { return _lastMessageDateUnix; }
             set
             {
-                LastMessageDateUnix = value;
+                _lastMessageDateUnix = value;
                 if (!value.HasValue)
                     LastMessageDate = null;
                 else
@@ -102,6 +106,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? LastMessageDate { get; set; }
 
         [JsonProperty("last_message_id")]

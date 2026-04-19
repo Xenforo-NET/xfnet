@@ -9,6 +9,8 @@ namespace xfnet.XfModels
     /// </summary>
     public class ProfilePostComment
     {
+        long? _commentDateUnix;
+
         [JsonProperty("username")]
         public string Username { get; set; }
 
@@ -69,10 +71,10 @@ namespace xfnet.XfModels
         [JsonProperty("comment_date")]
         public long? CommentDateUnix
         {
-            get { return CommentDateUnix; }
+            get { return _commentDateUnix; }
             set
             {
-                CommentDateUnix = value;
+                _commentDateUnix = value;
                 if (!value.HasValue)
                     CommentDate = null;
                 else
@@ -80,6 +82,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? CommentDate { get; set; }
 
         [JsonProperty("message")]

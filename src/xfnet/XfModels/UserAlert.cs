@@ -5,6 +5,10 @@ namespace xfnet.XfModels
 {
     public class UserAlert
     {
+        long? _eventDateUnix;
+        long? _readDateUnix;
+        long? _viewDateUnix;
+
         [JsonProperty("action")]
         public string Action { get; set; }
 
@@ -31,10 +35,10 @@ namespace xfnet.XfModels
 
         [JsonProperty("event_date")]
         public long? EventDateUnix { 
-            get { return EventDateUnix; }
+            get { return _eventDateUnix; }
             set
             {
-                EventDateUnix = value;
+                _eventDateUnix = value;
                 if (!value.HasValue)
                     EventDate = null;
                 else
@@ -42,6 +46,7 @@ namespace xfnet.XfModels
             }
         }
 
+        [JsonIgnore]
         public DateTime? EventDate { get; set; }
 
         public bool IsReaded { get; set; }
@@ -49,26 +54,24 @@ namespace xfnet.XfModels
         [JsonProperty("read_date")]
         public long? ReadDateUnix
         {
-            get { return ReadDateUnix; }
+            get { return _readDateUnix; }
             set
             {
-                ReadDateUnix = value;
-                if (value.HasValue)
+                _readDateUnix = value;
+                if (!value.HasValue || value.Value == 0)
                 {
-                    if (!value.HasValue)
-                    {
-                        ReadDate = null;
-                        IsReaded = false;
-                    }
-                    else
-                    {
-                        ReadDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
-                        IsReaded = value.Value != 0;
-                    }
+                    ReadDate = null;
+                    IsReaded = false;
+                }
+                else
+                {
+                    ReadDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+                    IsReaded = true;
                 }
             }
         }
 
+        [JsonIgnore]
         public DateTime? ReadDate { get; set; }
 
         [JsonProperty("User")]
@@ -78,33 +81,31 @@ namespace xfnet.XfModels
         public long? UserId { get; set; }
 
         [JsonProperty("username")]
-        public long? Username { get; set; }
+        public string Username { get; set; }
 
         public bool IsViewed { get; set; }
 
         [JsonProperty("view_date")]
         public long? ViewDateUnix
         {
-            get { return ViewDateUnix; }
+            get { return _viewDateUnix; }
             set
             {
-                ViewDateUnix = value;
-                if (value.HasValue)
+                _viewDateUnix = value;
+                if (!value.HasValue || value.Value == 0)
                 {
-                    if (!value.HasValue)
-                    {
-                        ViewDate = null;
-                        IsViewed = false;
-                    }
-                    else
-                    {
-                        ViewDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
-                        IsViewed = value.Value != 0;
-                    }
+                    ViewDate = null;
+                    IsViewed = false;
+                }
+                else
+                {
+                    ViewDate = Utilities.DateConvert.UnixTimeStampToDateTime(Convert.ToDouble(value.Value));
+                    IsViewed = true;
                 }
             }
         }
 
+        [JsonIgnore]
         public DateTime? ViewDate { get; set; }
     }
 }
