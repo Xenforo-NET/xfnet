@@ -21,7 +21,7 @@ Typed XenForo REST API client for .NET Framework 4.8.
 Package page: [XenForoSharp on NuGet](https://www.nuget.org/packages/XenForoSharp/)
 
 ```xml
-<PackageReference Include="XenForoSharp" Version="1.0.0" />
+<PackageReference Include="XenForoSharp" Version="1.0.1" />
 ```
 
 ```powershell
